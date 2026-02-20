@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El problema de Monty Hall</title>
+    
+    <script src="monty.js"></script>
+    <script src="app.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <h1 class="text-4xl">El problema de Monty Hall</h1>
+    <div x-data="{modo:'jugar'}">
+        <div class="border-b border-line-2">
+        <nav class="flex  gap-x-1" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
+            <div class="relative py-4 px-1 inline-flex items-center gap-x-2 text-sm whitespace-nowrap text-muted-foreground-1 after:absolute after:-bottom-px after:inset-x-0 after:w-full after:h-0.5 after:bg-transparent hover:text-blue-600 focus:outline-hidden focus:text-blue-600-focus disabled:opacity-50 disabled:pointer-events-none cursor-pointer" :class="modo=='jugar'?'font-semibold text-blue-600 after:bg-blue-600':''" @click="modo='jugar'">
+                Jugar
+            </div>
+            <div class="relative py-4 px-1 inline-flex items-center gap-x-2 text-sm whitespace-nowrap text-muted-foreground-1 after:absolute after:-bottom-px after:inset-x-0 after:w-full after:h-0.5 after:bg-transparent hover:text-blue-600 focus:outline-hidden focus:text-blue-600-focus disabled:opacity-50 disabled:pointer-events-none cursor-pointer" :class="modo=='simular'?'font-semibold text-blue-600 after:bg-blue-600':''" @click="modo='simular'">
+                Simular
+            </div>
+        </nav>
+        </div>
+        <div x-show="modo=='jugar'" class="w-full">
+            <div x-data="jugar" x-init="reset()">
+                <button @click="reset()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reiniciar</button>
+                <div class="text-xl">
+                    <div >Detrás de una puerta hay un coche. Las otras dos ocultan una cabra</div>
+                    <div x-show="estado=='eligiendo'">
+                        <div class="text-xl">¿Qué puerta quieres abrir?</div>
+                    </div>
+                    <div x-show="estado=='cambiando'">
+                        <div class="text-xl">Tras esta puerta hay una cabra. Puedes cambiar tu elección</div>
+                    </div>
+                    <div x-show="estado=='terminado'">
+                        <div class="text-2xl" x-text="ganado?'¡Has ganado!':'Has perdido'"></div>
+                        <div class="text-xl"><a :href="encuesta()" target="_blank">Comparte tus resultados con nosotros</a></div>
+                    </div>
+                </div>
+                <div class="grid grid-cols md:grid-cols-3 gap-1 p-6 justify-items-center overflow-auto">
+                    <template x-for="(puerta, i) in puertas">
+                    <div class="relative overflow-hidden rounded-lg shadow-2xl bg-gray-900 border hover:border-blue-600" :class="(seleccionada-1==i)?'border-4 border-blue-600':''" style="height: 400px; width: 200px;" @click="if(puerta=='cerrada'){clickPuerta(i+1)}">
+                        
+                        <img :src="puerta=='coche'?'coche.png':'cabra.png'"
+                            class="absolute inset-0 w-full h-full object-cover">
+
+                        <div class="absolute inset-0 z-10 transition-transform duration-500 ease-in-out"
+                            :class="puerta!='cerrada' ? 'translate-y-full' : 'translate-y-0'">
+                        
+                            <img src="puerta.png" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    </template>
+                </div>
+                
+            </div>
+        </div>
+        <div x-show="modo=='simular'" class="w-full">
+            <div x-data="simular" x-init="init()">
+                <button @click="reset()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reiniciar</button>
+                <div>
+                    <button @click="simular(1)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Jugar 1 partida</button>
+                    <button @click="simular(10)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Jugar 10 partidas</button>
+                    <button @click="simular(100)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Jugar 100 partidas</button>
+                </div>
+                
+                <div>
+                    <div class="text-2xl">Partidas jugadas: <div x-text="simulaciones"></div></div>
+                    <div class="text-2xl">Victorias cambiando de puerta: <div x-text="victoriasCambiar"></div></div>
+                    <div class="text-2xl">Victorias sin cambiar de puerta: <div x-text="victoriasNoCambiar"></div></div>
+                    <div class="text-2xl">Frecuencia relativa de victorias</div>
+                    <div id="main-chart" style="width: 400px; height: 400px;"></div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
