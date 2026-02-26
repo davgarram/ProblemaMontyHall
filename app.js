@@ -199,66 +199,54 @@ document.addEventListener('alpine:init', () => {
                 resultados[(fila[2]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
             });
             let data = [{
-                    name: `Conoce el juego (${resultados[7]+resultados[6]+resultados[5]+resultados[4]})`,
-                    value: resultados[7]+resultados[6]+resultados[5]+resultados[4],
-                    children: [
-                    {
-                        name: `Cambia (${resultados[7]+resultados[6]})`,
-                        value: resultados[7]+resultados[6],
-                        children: [
-                        {
-                            name: 'Gana',
-                            value: resultados[7],
-                        },
-                        {
-                            name: 'Pierde',
-                            value: resultados[6],
-                        }
-                    ]},{
-                        name: `No cambia (${resultados[5]+resultados[4]})`,
-                        value: resultados[5]+resultados[4],
-                        children: [
-                        {
-                            name: 'Gana',
-                            value: resultados[5],
-                        },
-                        {
-                            name: 'Pierde',
-                            value: resultados[4],
-                        }
-                        ]
-                    }],
+                name: `Conoce el juego (${resultados[7]+resultados[6]+resultados[5]+resultados[4]})`,
+                value: resultados[7]+resultados[6]+resultados[5]+resultados[4],
+                children: [{
+                    name: `Cambia (${resultados[7]+resultados[6]})`,
+                    value: resultados[7]+resultados[6],
+                    children: [{
+                        name: 'Gana',
+                        value: resultados[7],
+                    },{
+                        name: 'Pierde',
+                        value: resultados[6],
+                    }]
                 },{
-                    name: `No conoce el juego (${resultados[3]+resultados[2]+resultados[1]+resultados[0]})`,
-                    value: resultados[3]+resultados[2]+resultados[1]+resultados[0],
-                    children: [
-                    {
-                        name: `Cambia (${resultados[3]+resultados[2]})`,
-                        value: resultados[3]+resultados[2],
-                        children: [
-                        {
-                            name: 'Gana',
-                            value: resultados[3],
-                        },
-                        {
-                            name: 'Pierde',
-                            value: resultados[2],
-                        }
-                    ]},{
-                        name: `No cambia (${resultados[1]+resultados[0]})`,
-                        value: resultados[1]+resultados[0],
-                        children: [
-                        {
-                            name: 'Gana',
-                            value: resultados[1],
-                        },
-                        {
-                            name: 'Pierde',
-                            value: resultados[0],
-                        }
-                        ]
-                    }],
-                }];
+                    name: `No cambia (${resultados[5]+resultados[4]})`,
+                    value: resultados[5]+resultados[4],
+                    children: [{
+                        name: 'Gana',
+                        value: resultados[5],
+                    },{
+                        name: 'Pierde',
+                        value: resultados[4],
+                    }]
+                }],
+            },{
+                name: `No conoce el juego (${resultados[3]+resultados[2]+resultados[1]+resultados[0]})`,
+                value: resultados[3]+resultados[2]+resultados[1]+resultados[0],
+                children: [{
+                    name: `Cambia (${resultados[3]+resultados[2]})`,
+                    value: resultados[3]+resultados[2],
+                    children: [{
+                        name: 'Gana',
+                        value: resultados[3],
+                    },{
+                        name: 'Pierde',
+                        value: resultados[2],
+                    }]
+                },{
+                    name: `No cambia (${resultados[1]+resultados[0]})`,
+                    value: resultados[1]+resultados[0],
+                    children: [{
+                        name: 'Gana',
+                        value: resultados[1],
+                    },{
+                        name: 'Pierde',
+                        value: resultados[0],
+                    }]
+                }],
+            }];
             Alpine.raw(this.myChart).setOption({
                 series: [
                 {
