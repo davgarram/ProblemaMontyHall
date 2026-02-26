@@ -79,15 +79,15 @@
                     <div class="text-2xl">Victorias cambiando de puerta: <div x-text="victoriasCambiar"></div></div>
                     <div class="text-2xl">Victorias sin cambiar de puerta: <div x-text="victoriasNoCambiar"></div></div>
                     <div class="text-2xl">Frecuencia relativa de victorias</div>
-                    <div id="main-chart" style="width: 400px; height: 400px;"></div>
+                    <div id="main-chart" style="width: 700px; height: 700px;"></div>
                 </div>
             </div>
             
         </div>
-        <div x-show="modo=='simular'" class="w-full">
+        <div x-show="modo=='resultados'" class="w-full">
             <div x-data="resultados" x-init="init()">
                 <div>
-                    <div id="csv-chart" style="width: 400px; height: 400px;"></div>
+                    <div id="csv-chart" style="width: 700px; height: 700px;"></div>
                 </div>
             </div>
         </div>
