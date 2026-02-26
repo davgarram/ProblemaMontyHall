@@ -214,7 +214,7 @@ document.addEventListener('alpine:init', () => {
                             name: 'Pierde',
                             value: resultados[6],
                         }
-                        ],
+                    ]},{
                         name: `No cambia (${resultados[5]+resultados[4]})`,
                         value: resultados[5]+resultados[4],
                         children: [
@@ -244,7 +244,7 @@ document.addEventListener('alpine:init', () => {
                             name: 'Pierde',
                             value: resultados[2],
                         }
-                        ],
+                    ]},{
                         name: `No cambia (${resultados[1]+resultados[0]})`,
                         value: resultados[1]+resultados[0],
                         children: [
