@@ -196,7 +196,7 @@ document.addEventListener('alpine:init', () => {
         actualizarUi(){
             let resultados = Array(7).fill(0);
             this.datos.forEach(function (fila) {
-                resultados[(fila[2]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
+                resultados[(fila[1]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
             });
             let data = [{
                 name: `Conoce el juego (${resultados[7]+resultados[6]+resultados[5]+resultados[4]})`,
@@ -258,7 +258,7 @@ document.addEventListener('alpine:init', () => {
         async prepararDatos(){
             const response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8iQsimlc7Z-2Wc5QgxbE88aQKBrtFWssJSf76k7YvdLnIzETF5sg-2IFClHBFQ4JxENVLhdYkBy77/pub?gid=556463383&single=true&output=csv");
             const datos = await response.text();
-            this.datos = datos.split('\n').slice(1).map(fila => fila.split(','));
+            this.datos = datos.split('\r\n').slice(1).map(fila => fila.split(','));
             console.log(this.datos);
             this.actualizarUi();
         }
