@@ -8,6 +8,8 @@ class ProblemaMontyHall {
     #estado = "eligiendo";
     #puertaConcursante = 0; //La puerta elegida por el concursante
     #puertaAbierta = 0; //La puerta abierta por el presentador
+    #haCambiado = false; //Verdadero si ha cambiado
+    #puertaConcursanteInicial = 0; //La puerta elegida por el concursante al principio
     constructor() {
         this.#puertaCoche = Math.ceil(Math.random() * 3); //Se coloca el coche tras una puerta con probabilidad uniforme (pseudoaleatorio)
     }
@@ -17,6 +19,7 @@ class ProblemaMontyHall {
             return false;
         }
         this.#puertaConcursante = puerta;
+        this.#puertaConcursanteInicial = puerta;
         //Las tres puertas siempre suman 6. Abrimos la que no es ni la actual ni la del coche.
         this.#puertaAbierta = (this.#puertaCoche==this.#puertaConcursante)? ((this.#puertaConcursante-1+Math.sign(Math.random()-0.5))%3)+1 : 6 - (this.#puertaConcursante + this.#puertaCoche);
         this.#estado = "cambiando";
@@ -30,6 +33,7 @@ class ProblemaMontyHall {
         if(cambiar){
             //Las tres puertas siempre suman 6. Cambiamos a la que no es ni la actual ni la abierta.
             this.#puertaConcursante = 6 - (this.#puertaConcursante + this.#puertaAbierta);
+            this.#haCambiado = true;
         }
         this.#estado = "terminado";
         return true;
@@ -64,6 +68,12 @@ class ProblemaMontyHall {
             estadoPuertas[this.puertaCoche-1]="coche";
         }
         return estadoPuertas;
+    }
+    get puertaInicial(){
+        return this.#puertaConcursanteInicial;
+    }
+    get haCambiado(){
+        return this.#haCambiado;
     }
 
     //Devuelve true en caso de victoria

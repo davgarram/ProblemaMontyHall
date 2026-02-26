@@ -40,7 +40,7 @@
                     </div>
                     <div x-show="estado=='terminado'">
                         <div class="text-2xl" x-text="ganado?'¡Has ganado!':'Has perdido'"></div>
-                        <div class="text-xl"><a :href="encuesta()" target="_blank">Comparte tus resultados con nosotros</a></div>
+                            <button @click="encuesta()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Comparte tus resultados con nosotros</button>
                     </div>
                 </div>
                 <div class="grid grid-cols md:grid-cols-3 gap-1 p-6 justify-items-center overflow-auto">

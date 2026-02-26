@@ -1,6 +1,5 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('jugar', () => ({
-        encuestaBase:'',//Enlace a google docs
         estado: undefined,
         puertas: undefined,
         seleccionada: undefined,
@@ -25,7 +24,6 @@ document.addEventListener('alpine:init', () => {
             this.puertas=Alpine.raw(this.monty).estadoPuertas;
             this.seleccionada=Alpine.raw(this.monty).puertaConcursante;
             this.ganado=Alpine.raw(this.monty).haGanado;
-            console.log(this.puertas);
         },
         clickPuerta(puerta){
             switch(this.estado){
@@ -38,7 +36,14 @@ document.addEventListener('alpine:init', () => {
             }
         },
         encuesta(){
-            return this.encuestaBase;
+            const url = new URL('https://docs.google.com/forms/d/e/1FAIpQLSeQSGHDnNAOwjo2r3Z3qq14jN2UWHU70whyB35ONuqZ2zAJow/viewform');
+            
+            url.searchParams.set('usp', 'pp_url');
+            url.searchParams.set('entry.617973885', `Puerta ${Alpine.raw(this.monty).puertaInicial}`);
+            url.searchParams.set('entry.1318153726', Alpine.raw(this.monty).haCambiado?'Sí':'No');
+            url.searchParams.set('entry.1612167640', Alpine.raw(this.monty).haGanado?'Sí':'No');
+
+            window.open(url.href, '_blank');
         }
     }))
 
