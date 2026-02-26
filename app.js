@@ -185,10 +185,6 @@ document.addEventListener('alpine:init', () => {
                     // emphasis: {
                     //     focus: 'ancestor'
                     // },
-                    data: {
-                        name:'Cargando',
-                        value: 1,
-                    },
                     radius: [0, '90%'],
                     label: {
                     rotate: 'radial'
@@ -199,7 +195,7 @@ document.addEventListener('alpine:init', () => {
         },
         actualizarUi(){
             let resultados = Array(7).fill(0);
-            this.datos.foreach(function (fila) {
+            this.datos.forEach(function (fila) {
                 resultados[(fila[2]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
             });
             let data = {
