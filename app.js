@@ -205,20 +205,20 @@ document.addEventListener('alpine:init', () => {
                     name: `Cambia (${resultados[7]+resultados[6]})`,
                     value: resultados[7]+resultados[6],
                     children: [{
-                        name: 'Gana',
+                        name: `Gana (${resultados[7]})`,
                         value: resultados[7],
                     },{
-                        name: 'Pierde',
+                        name: `Pierde (${resultados[6]})`,
                         value: resultados[6],
                     }]
                 },{
                     name: `No cambia (${resultados[5]+resultados[4]})`,
                     value: resultados[5]+resultados[4],
                     children: [{
-                        name: 'Gana',
+                        name: `Gana (${resultados[5]})`,
                         value: resultados[5],
                     },{
-                        name: 'Pierde',
+                        name: `Pierde (${resultados[4]})`,
                         value: resultados[4],
                     }]
                 }],
@@ -229,20 +229,20 @@ document.addEventListener('alpine:init', () => {
                     name: `Cambia (${resultados[3]+resultados[2]})`,
                     value: resultados[3]+resultados[2],
                     children: [{
-                        name: 'Gana',
+                        name: `Gana (${resultados[3]})`,
                         value: resultados[3],
                     },{
-                        name: 'Pierde',
+                        name: `Pierde (${resultados[2]})`,
                         value: resultados[2],
                     }]
                 },{
                     name: `No cambia (${resultados[1]+resultados[0]})`,
                     value: resultados[1]+resultados[0],
                     children: [{
-                        name: 'Gana',
+                        name: `Gana (${resultados[1]})`,
                         value: resultados[1],
                     },{
-                        name: 'Pierde',
+                        name: `Pierde (${resultados[0]})`,
                         value: resultados[0],
                     }]
                 }],
