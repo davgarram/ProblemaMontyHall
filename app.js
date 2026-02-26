@@ -194,11 +194,10 @@ document.addEventListener('alpine:init', () => {
             this.prepararDatos(); 
         },
         actualizarUi(){
-            let resultados = Array(7).fill(0);
+            let resultados = Array(8).fill(0);
             this.datos.forEach(function (fila) {
                 resultados[(fila[1]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
             });
-            console.log(resultados);
             let data = [{
                 name: `Conoce el juego (${resultados[7]+resultados[6]+resultados[5]+resultados[4]})`,
                 value: resultados[7]+resultados[6]+resultados[5]+resultados[4],
