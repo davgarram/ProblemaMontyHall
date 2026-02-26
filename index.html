@@ -13,6 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 <body class="bg-gray-100 p-8">
     <h1 class="text-4xl">El problema de Monty Hall</h1>
@@ -24,6 +25,9 @@
             </div>
             <div class="relative py-4 px-1 inline-flex items-center gap-x-2 text-sm whitespace-nowrap text-muted-foreground-1 after:absolute after:-bottom-px after:inset-x-0 after:w-full after:h-0.5 after:bg-transparent hover:text-blue-600 focus:outline-hidden focus:text-blue-600-focus disabled:opacity-50 disabled:pointer-events-none cursor-pointer" :class="modo=='simular'?'font-semibold text-blue-600 after:bg-blue-600':''" @click="modo='simular'">
                 Simular
+            </div>
+            <div class="relative py-4 px-1 inline-flex items-center gap-x-2 text-sm whitespace-nowrap text-muted-foreground-1 after:absolute after:-bottom-px after:inset-x-0 after:w-full after:h-0.5 after:bg-transparent hover:text-blue-600 focus:outline-hidden focus:text-blue-600-focus disabled:opacity-50 disabled:pointer-events-none cursor-pointer" :class="modo=='resultados'?'font-semibold text-blue-600 after:bg-blue-600':''" @click="modo='resultados'">
+                Resultados
             </div>
         </nav>
         </div>
@@ -79,6 +83,13 @@
                 </div>
             </div>
             
+        </div>
+        <div x-show="modo=='simular'" class="w-full">
+            <div x-data="resultados" x-init="init()">
+                <div>
+                    <div id="csv-chart" style="width: 400px; height: 400px;"></div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

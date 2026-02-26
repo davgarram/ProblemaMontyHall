@@ -54,8 +54,8 @@ document.addEventListener('alpine:init', () => {
         gaugeData:null,
         myChart:null,
         init(){
-            var chartDom = document.getElementById('main-chart');
-            var myChart = echarts.init(chartDom);
+            let chartDom = document.getElementById('main-chart');
+            let myChart = echarts.init(chartDom);
             const gaugeData = [
             {
                 value: 0,
@@ -168,6 +168,106 @@ document.addEventListener('alpine:init', () => {
                 }
                 ]
             });
+        }
+    }))
+
+    Alpine.data('resultados', () => ({
+        fuente:'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8iQsimlc7Z-2Wc5QgxbE88aQKBrtFWssJSf76k7YvdLnIzETF5sg-2IFClHBFQ4JxENVLhdYkBy77/pub?gid=556463383&single=true&output=csv',
+        datos:undefined,
+        myChart:undefined,
+        init(){
+            let chartDom = document.getElementById('csv-chart');
+            let myChart = echarts.init(chartDom);
+            this.myChart=myChart;
+            this.myChart.setOption({
+                series: {
+                    type: 'sunburst',
+                    // emphasis: {
+                    //     focus: 'ancestor'
+                    // },
+                    data: data,
+                    radius: [0, '90%'],
+                    label: {
+                    rotate: 'radial'
+                    }
+                }
+            });
+            this.prepararDatos(); 
+        },
+        actualizarUi(){
+            let resultados = Array(7).fill(0);
+            this.data.foreach(function (fila) {
+                resultados[(fila[2]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
+            });
+            let data = {
+                name: 'Conoce el juego',
+                children: [
+                {
+                    name: 'Cambia',
+                    children: [
+                    {
+                        name: 'Gana',
+                        value: resultados[7],
+                    },
+                    {
+                        name: 'Pierde',
+                        value: resultados[6],
+                    }
+                    ],
+                    name: 'No cambia',
+                    children: [
+                    {
+                        name: 'Gana',
+                        value: resultados[5],
+                    },
+                    {
+                        name: 'Pierde',
+                        value: resultados[4],
+                    }
+                    ]
+                }],
+                name: 'Conoce el juego',
+                children: [
+                {
+                    name: 'Cambia',
+                    children: [
+                    {
+                        name: 'Gana',
+                        value: resultados[3],
+                    },
+                    {
+                        name: 'Pierde',
+                        value: resultados[2],
+                    }
+                    ],
+                    name: 'No cambia',
+                    children: [
+                    {
+                        name: 'Gana',
+                        value: resultados[1],
+                    },
+                    {
+                        name: 'Pierde',
+                        value: resultados[0],
+                    }
+                    ]
+                }],
+
+            };
+            Alpine.raw(this.myChart).setOption({
+                series: [
+                {
+                    data: data
+                }
+                ]
+            });
+        },
+        async prepararDatos(){
+            const response = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vR8iQsimlc7Z-2Wc5QgxbE88aQKBrtFWssJSf76k7YvdLnIzETF5sg-2IFClHBFQ4JxENVLhdYkBy77/pub?gid=556463383&single=true&output=csv");
+            const datos = await response.text();
+            this.datos = datos.split('\n').slice(1).map(fila => fila.split(','));
+            console.log(this.datos);
+            this.actualizarUi();
         }
     }))
 })
