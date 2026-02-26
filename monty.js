@@ -60,7 +60,7 @@ class ProblemaMontyHall {
     }
     //Array con el estado de las puertas, "cerrada", "cabra", "coche",
     get estadoPuertas(){
-        let estadoPuertas = Array(3).fill("cerrada");
+        let estadoPuertas = Array(3).fill(this.#estado=="terminado"?"cabra":"cerrada");
         if(this.puertaAbierta){
             estadoPuertas[this.puertaAbierta-1]="cabra";
         }
