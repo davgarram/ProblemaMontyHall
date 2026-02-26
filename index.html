@@ -31,12 +31,12 @@
             <div x-data="jugar" x-init="reset()">
                 <button @click="reset()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reiniciar</button>
                 <div class="text-xl">
-                    <div >Detrás de una puerta hay un coche. Las otras dos ocultan una cabra</div>
+                    <div >Detrás de una puerta hay un premio. Las otras dos no tienen premio</div>
                     <div x-show="estado=='eligiendo'">
                         <div class="text-xl">¿Qué puerta quieres abrir?</div>
                     </div>
                     <div x-show="estado=='cambiando'">
-                        <div class="text-xl">Tras esta puerta hay una cabra. Puedes cambiar tu elección</div>
+                        <div class="text-xl">Tras esta puerta está Botilde, que no tiene un premio para ti. Puedes cambiar tu elección</div>
                     </div>
                     <div x-show="estado=='terminado'">
                         <div class="text-2xl" x-text="ganado?'¡Has ganado!':'Has perdido'"></div>
