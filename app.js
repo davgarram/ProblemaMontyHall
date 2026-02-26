@@ -185,7 +185,9 @@ document.addEventListener('alpine:init', () => {
                     // emphasis: {
                     //     focus: 'ancestor'
                     // },
-                    data: data,
+                    data: {
+                        name:'Cargando',
+                    },
                     radius: [0, '90%'],
                     label: {
                     rotate: 'radial'
