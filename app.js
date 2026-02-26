@@ -187,6 +187,7 @@ document.addEventListener('alpine:init', () => {
                     // },
                     data: {
                         name:'Cargando',
+                        value: 1,
                     },
                     radius: [0, '90%'],
                     label: {
@@ -198,7 +199,7 @@ document.addEventListener('alpine:init', () => {
         },
         actualizarUi(){
             let resultados = Array(7).fill(0);
-            this.data.foreach(function (fila) {
+            this.datos.foreach(function (fila) {
                 resultados[(fila[2]=="Sí"?4:0) + (fila[3]=="Sí"?2:0) + (fila[4]=="Sí"?1:0)]+=1;
             });
             let data = {
