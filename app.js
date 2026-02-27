@@ -199,6 +199,8 @@ document.addEventListener('alpine:init', () => {
                 emphasis: {
                     focus: 'adjacency'
                 },
+                data: [{name:'a'},{name:'b'}],
+                links:[{source: 'a',target: 'b',value: 1},]
             }
             });
             this.prepararDatos(); 
