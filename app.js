@@ -200,7 +200,18 @@ document.addEventListener('alpine:init', () => {
                     focus: 'adjacency'
                 },
                 data: [{name:'a'},{name:'b'}],
-                links:[{source: 'a',target: 'b',value: 1},]
+                links:[{source: 'a',target: 'b',value: 1},],
+                edgeLabel: {
+                    show: true,
+                    formatter: '{c}',
+                    color: '#333'
+                },
+                emphasis: {
+                    edgeLabel: {
+                        show: true,
+                        fontWeight: 'bold'
+                    }
+                }
             }
             });
             this.prepararDatos(); 
