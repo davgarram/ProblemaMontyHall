@@ -182,6 +182,7 @@ document.addEventListener('alpine:init', () => {
             let chartDom2 = document.getElementById('sank-chart');
             let myChart2 = echarts.init(chartDom2);
             this.myChart=myChart;
+            this.myChart2=myChart2;
             this.myChart.setOption({
                 series: {
                     type: 'sunburst',
