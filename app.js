@@ -175,21 +175,30 @@ document.addEventListener('alpine:init', () => {
         fuente:'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8iQsimlc7Z-2Wc5QgxbE88aQKBrtFWssJSf76k7YvdLnIzETF5sg-2IFClHBFQ4JxENVLhdYkBy77/pub?gid=556463383&single=true&output=csv',
         datos:undefined,
         myChart:undefined,
+        myChart2:undefined,
         init(){
-            let chartDom = document.getElementById('csv-chart');
+            let chartDom = document.getElementById('sun-chart');
             let myChart = echarts.init(chartDom);
+            let chartDom2 = document.getElementById('sank-chart');
+            let myChart2 = echarts.init(chartDom2);
             this.myChart=myChart;
             this.myChart.setOption({
                 series: {
                     type: 'sunburst',
-                    // emphasis: {
-                    //     focus: 'ancestor'
-                    // },
                     radius: [0, '90%'],
                     label: {
                     rotate: 'radial'
                     }
                 }
+            });
+            this.myChart2.setOption({
+                series: {
+                type: 'sankey',
+                layout: 'none',
+                emphasis: {
+                    focus: 'adjacency'
+                },
+            }
             });
             this.prepararDatos(); 
         },
@@ -253,6 +262,53 @@ document.addEventListener('alpine:init', () => {
                     data: data
                 }
                 ]
+            });
+            Alpine.raw(this.myChart2).setOption({
+                series:{
+                    data: [{name: 'Conoce el juego'},{name: 'No conoce el juego'},{name: 'Cambia'},{name: 'No cambia'},{name: 'Gana'},{name: 'Pierde'}],
+                    links: [
+                    {
+                        source: 'Conoce el juego',
+                        target: 'Cambia',
+                        value: resultados[7]+resultados[6]
+                    },
+                    {
+                        source: 'Conoce el juego',
+                        target: 'No cambia',
+                        value: resultados[5]+resultados[4]
+                    },
+                    {
+                        source: 'No conoce el juego',
+                        target: 'Cambia',
+                        value: resultados[3]+resultados[2]
+                    },
+                    {
+                        source: 'No conoce el juego',
+                        target: 'No cambia',
+                        value: resultados[1]+resultados[0]
+                    },
+                    {
+                        source: 'Cambia',
+                        target: 'Gana',
+                        value: resultados[7]+resultados[3]
+                    },
+                    {
+                        source: 'Cambia',
+                        target: 'Pierde',
+                        value: resultados[6]+resultados[2]
+                    },
+                    {
+                        source: 'No cambia',
+                        target: 'Gana',
+                        value: resultados[5]+resultados[1]
+                    },
+                    {
+                        source: 'No cambia',
+                        target: 'Pierde',
+                        value: resultados[4]+resultados[0]
+                    }
+                    ]
+                }
             });
         },
         async prepararDatos(){
