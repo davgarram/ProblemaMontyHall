@@ -193,6 +193,10 @@ document.addEventListener('alpine:init', () => {
                 }
             });
             this.myChart2.setOption({
+                tooltip: {
+                    trigger: 'item',
+                    triggerOn: 'mousemove'
+                },
                 series: {
                 type: 'sankey',
                 layout: 'none',
@@ -201,16 +205,8 @@ document.addEventListener('alpine:init', () => {
                 },
                 data: [{name:'a'},{name:'b'}],
                 links:[{source: 'a',target: 'b',value: 1},],
-                edgeLabel: {
-                    show: true,
-                    formatter: '{c}',
-                    color: '#333'
-                },
-                emphasis: {
-                    edgeLabel: {
-                        show: true,
-                        fontWeight: 'bold'
-                    }
+                label: {
+                    formatter: '{b}: {c}'
                 }
             }
             });
