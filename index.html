@@ -18,7 +18,7 @@
 <body class="bg-gray-100 p-8">
     <h1 class="text-4xl">El problema de Monty Hall</h1>
     <div x-data="{modo:'jugar'}">
-        <div class="border-b border-line-2">
+        <div class="border-b border-line-2 mb-2">
         <nav class="flex  gap-x-1" aria-label="Tabs" role="tablist" aria-orientation="horizontal">
             <div class="relative py-4 px-1 inline-flex items-center gap-x-2 text-sm whitespace-nowrap text-muted-foreground-1 after:absolute after:-bottom-px after:inset-x-0 after:w-full after:h-0.5 after:bg-transparent hover:text-blue-600 focus:outline-hidden focus:text-blue-600-focus disabled:opacity-50 disabled:pointer-events-none cursor-pointer" :class="modo=='jugar'?'font-semibold text-blue-600 after:bg-blue-600':''" @click="modo='jugar'">
                 Jugar
