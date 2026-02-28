@@ -206,8 +206,11 @@ document.addEventListener('alpine:init', () => {
                 data: [{name:'a'},{name:'b'}],
                 links:[{source: 'a',target: 'b',value: 1},],
                 label: {
-                    formatter: '{b}: {c}'
-                }
+                    formatter: '{b}: {c}',
+                    position: 'top',
+                    fontSize: 18,
+                },
+                orient: 'vertical',
             }
             });
             this.prepararDatos(); 
